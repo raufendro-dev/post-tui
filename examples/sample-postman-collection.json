@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "post-tui sample collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "HTTPBin",
+      "item": [
+        {
+          "name": "Get anything",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "https://httpbin.org/anything?source=post-tui",
+              "protocol": "https",
+              "host": ["httpbin", "org"],
+              "path": ["anything"],
+              "query": [
+                {
+                  "key": "source",
+                  "value": "post-tui"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get HTML",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "text/html"
+              }
+            ],
+            "url": "https://httpbin.org/html"
+          }
+        },
+        {
+          "name": "Post JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "content-type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hello\": \"terminal\"\n}"
+            },
+            "url": "https://httpbin.org/post"
+          }
+        }
+      ]
+    }
+  ]
+}
