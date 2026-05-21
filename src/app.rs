@@ -4,13 +4,13 @@ use anyhow::{Context, Result};
 use crossterm::event::{KeyCode, KeyEvent, KeyModifiers};
 
 use crate::{
+    collection_import,
     http::HttpClient,
     input::TextInput,
     models::{
         AuthConfig, BodyConfig, Collection, Folder, Header, HistoryItem, QueryParam, RequestItem,
         RequestModel, ResponseModel,
     },
-    postman,
     storage::{AppConfig, Storage},
 };
 
@@ -331,10 +331,10 @@ impl App {
         Ok(())
     }
 
-    pub fn import_postman_collection(&mut self, path: &str) -> Result<()> {
+    pub fn import_collection(&mut self, path: &str) -> Result<()> {
         let contents = fs::read_to_string(path)
             .with_context(|| format!("Could not read import file: {path}"))?;
-        let collection = postman::parse_collection(&contents)?;
+        let collection = collection_import::parse_collection(&contents)?;
         let name = collection.name.clone();
         self.collections.push(collection);
         self.storage.save_collections(&self.collections)?;
@@ -745,7 +745,7 @@ impl App {
             }
             EditTarget::ImportPath => {
                 self.modal = None;
-                if let Err(error) = self.import_postman_collection(value.trim()) {
+                if let Err(error) = self.import_collection(value.trim()) {
                     self.modal = Some(Modal::Error(format!("{error:#}")));
                 }
             }

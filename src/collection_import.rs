@@ -6,8 +6,7 @@ use crate::models::{
 };
 
 pub fn parse_collection(input: &str) -> Result<Collection> {
-    let root: Value =
-        serde_json::from_str(input).context("Postman collection is not valid JSON")?;
+    let root: Value = serde_json::from_str(input).context("collection file is not valid JSON")?;
     let name = root
         .pointer("/info/name")
         .and_then(Value::as_str)
@@ -17,7 +16,7 @@ pub fn parse_collection(input: &str) -> Result<Collection> {
     let items = root
         .get("item")
         .and_then(Value::as_array)
-        .ok_or_else(|| anyhow!("This does not look like a Postman Collection v2.1 file."))?;
+        .ok_or_else(|| anyhow!("This does not look like a Collection v2.1 JSON file."))?;
 
     let mut collection = Collection {
         name,

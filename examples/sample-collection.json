@@ -1,7 +1,6 @@
 {
   "info": {
-    "name": "post-tui sample collection",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "name": "post-tui sample collection"
   },
   "item": [
     {

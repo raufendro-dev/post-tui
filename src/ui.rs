@@ -459,7 +459,7 @@ fn render_modal(frame: &mut Frame<'_>, area: Rect, app: &App, modal: &Modal) {
         Modal::Help => "Help",
         Modal::About => "About",
         Modal::Curl(_) => "Generated cURL",
-        Modal::Import => "Import Postman Collection",
+        Modal::Import => "Import Collection",
         Modal::Search => "Search",
         Modal::ResponseSearch => "Search Response",
         Modal::ConfirmNewRequest => "New Request",
@@ -474,7 +474,7 @@ fn render_modal(frame: &mut Frame<'_>, area: Rect, app: &App, modal: &Modal) {
         Modal::About => about_text(),
         Modal::Curl(command) => format!("{command}\n\nEsc closes this message."),
         Modal::Import => format!(
-            "Type the path to a Postman Collection v2.1 JSON file.\n\nPath:\n{}\n\nEnter imports, Esc closes.",
+            "Type the path to a Collection v2.1 JSON file.\n\nPath:\n{}\n\nEnter imports, Esc closes.",
             app.input.value_with_cursor(app.blink_on)
         ),
         Modal::Search => format!(
@@ -581,7 +581,7 @@ fn help_text() -> String {
         "  Ctrl+r         Run current request",
         "  Ctrl+s         Save current request",
         "  n              New request",
-        "  o              Import Postman collection",
+        "  o              Import collection JSON",
         "  /              Search collections/history",
         "  c              Clear history and local HTML exports",
         "  d              Delete selected sidebar item",

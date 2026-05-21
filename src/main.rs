@@ -1,9 +1,9 @@
 mod app;
+mod collection_import;
 mod event;
 mod http;
 mod input;
 mod models;
-mod postman;
 mod storage;
 mod theme;
 mod ui;

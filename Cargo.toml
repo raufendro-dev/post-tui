@@ -2,11 +2,13 @@
 name = "post-tui"
 version = "1.0.0"
 edition = "2021"
-description = "A terminal HTTP API client inspired by Postman"
+description = "A professional terminal HTTP API client"
 license = "MIT"
 readme = "README.md"
 documentation = "https://docs.rs/post-tui"
-keywords = ["tui", "http", "api", "postman", "terminal"]
+repository = "https://github.com/raufendro-dev/post-tui"
+homepage = "https://github.com/raufendro-dev/post-tui"
+keywords = ["tui", "http", "api", "client", "terminal"]
 categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]

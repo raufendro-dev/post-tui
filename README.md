@@ -4,6 +4,33 @@
 
 The app is written in Rust with `ratatui`, `crossterm`, `reqwest`, `tokio`, `serde`, and local JSON/TOML storage. It is designed to stay usable on modest hardware and small terminal windows.
 
+## Preview
+
+```text
+ post-tui  NORMAL  ? help  q quit  r run  u curl  Enter edit/load
+┌ Collections / History ┐ ┌ Request Builder ────────────────────┐
+│ Saved requests        │ │   Method  GET  Arrow <- or ->        │
+│ › Get users           │ │ › URL     https://example.com/api    │
+│   Create user         │ │   Headers 2 header(s)                │
+│                       │ │   Query   page=1&limit=20            │
+│ Imported API          │ │   Auth    Bearer Token               │
+│   Users               │ │   Body    Empty                      │
+│     List users        │ │                                      │
+│     Create user       │ │ Run: r   Edit field: Enter           │
+│                       │ └──────────────────────────────────────┘
+│ History               │ ┌ Response ────────────────────────────┐
+│   GET 200 /api/users  │ │ Pretty | Tree | Raw | HTML | Headers │
+│   POST 201 /api/users │ │ j/k scroll  PgUp/PgDn  / search      │
+│                       │ │ 200 OK | 124 ms | 512 B              │
+│                       │ │ {                                    │
+│                       │ │   "data": [                          │
+│                       │ │     { "id": 1, "name": "Ada" }       │
+│                       │ │   ]                                  │
+│                       │ │ }                                    │
+└───────────────────────┘ └──────────────────────────────────────┘
+ Data: ~/.local/share/post-tui | j/k move  h/l tabs  d delete
+```
+
 ## Installation
 
 Install Rust stable from <https://rustup.rs/>, then install `post-tui` from crates.io:
@@ -158,7 +185,7 @@ Press `o`, type the path to a Collection v2.1 JSON file, then press `Enter`.
 Example from this repository:
 
 ```text
-examples/sample-postman-collection.json
+examples/sample-collection.json
 ```
 
 Imported requests appear in the sidebar. Select a request with `j/k`; it loads into the request builder automatically.
@@ -217,7 +244,7 @@ Missing or corrupted local files are handled gracefully and recreated when data 
 This repository includes a sample collection:
 
 ```text
-examples/sample-postman-collection.json
+examples/sample-collection.json
 ```
 
 It contains sample JSON and HTML requests that are useful for testing import, response tabs, and browser view.
