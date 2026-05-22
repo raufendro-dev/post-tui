@@ -28,7 +28,6 @@ The app is written in Rust with `ratatui`, `crossterm`, `reqwest`, `tokio`, `ser
 - [Local Data](#local-data)
 - [Sample Collection](#sample-collection)
 - [Current Limitations](#current-limitations)
-- [Contributing](#contributing)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Author](#author)
