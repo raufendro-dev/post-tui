@@ -4,48 +4,189 @@
 
 The app is written in Rust with `ratatui`, `crossterm`, `reqwest`, `tokio`, `serde`, and local JSON/TOML storage. It is designed to stay usable on modest hardware and small terminal windows.
 
+## Table of Contents
+
+- [Preview](#preview)
+- [Installation](#installation)
+  - [1. Install System Requirements](#1-install-system-requirements)
+  - [2. Install Rust and Cargo](#2-install-rust-and-cargo)
+  - [3. Check Rust and Cargo](#3-check-rust-and-cargo)
+  - [4. Add Cargo to PATH if Needed](#4-add-cargo-to-path-if-needed)
+  - [5. Install post-tui](#5-install-post-tui)
+  - [6. Run post-tui](#6-run-post-tui)
+  - [7. Update post-tui Later](#7-update-post-tui-later)
+  - [Build From Source](#build-from-source)
+- [Features](#features)
+- [Interface](#interface)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
+- [Editing Requests](#editing-requests)
+- [Running Requests](#running-requests)
+- [Response Viewer](#response-viewer)
+- [cURL Generation](#curl-generation)
+- [Collection Import](#collection-import)
+- [Collections, Saved Requests, and History](#collections-saved-requests-and-history)
+- [Local Data](#local-data)
+- [Sample Collection](#sample-collection)
+- [Current Limitations](#current-limitations)
+- [Roadmap](#roadmap)
+- [License](#license)
+- [Author](#author)
+
 ## Preview
 
-```text
- post-tui  NORMAL  ? help  q quit  r run  u curl  Enter edit/load
-┌ Collections / History ┐ ┌ Request Builder ────────────────────┐
-│ Saved requests        │ │   Method  GET  Arrow <- or ->        │
-│ › Get users           │ │ › URL     https://example.com/api    │
-│   Create user         │ │   Headers 2 header(s)                │
-│                       │ │   Query   page=1&limit=20            │
-│ Imported API          │ │   Auth    Bearer Token               │
-│   Users               │ │   Body    Empty                      │
-│     List users        │ │                                      │
-│     Create user       │ │ Run: r   Edit field: Enter           │
-│                       │ └──────────────────────────────────────┘
-│ History               │ ┌ Response ────────────────────────────┐
-│   GET 200 /api/users  │ │ Pretty | Tree | Raw | HTML | Headers │
-│   POST 201 /api/users │ │ j/k scroll  PgUp/PgDn  / search      │
-│                       │ │ 200 OK | 124 ms | 512 B              │
-│                       │ │ {                                    │
-│                       │ │   "data": [                          │
-│                       │ │     { "id": 1, "name": "Ada" }       │
-│                       │ │   ]                                  │
-│                       │ │ }                                    │
-└───────────────────────┘ └──────────────────────────────────────┘
- Data: ~/.local/share/post-tui | j/k move  h/l tabs  d delete
-```
+![post-tui terminal interface](https://raw.githubusercontent.com/raufendro-dev/post-tui/main/screenshot.png)
 
 ## Installation
 
-Install Rust stable from <https://rustup.rs/>, then install `post-tui` from crates.io:
+`post-tui` is distributed through crates.io, so the easiest installation path is through Rust's package manager, Cargo.
+
+If you already have Rust and Cargo installed, skip to [Install post-tui](#install-post-tui).
+
+### 1. Install System Requirements
+
+`cargo install` builds the app on your machine. Some operating systems need basic compiler tools installed first.
+
+#### Linux
+
+Debian/Ubuntu:
+
+```bash
+sudo apt update
+sudo apt install -y build-essential pkg-config
+```
+
+Fedora:
+
+```bash
+sudo dnf install -y gcc gcc-c++ make pkgconf-pkg-config
+```
+
+Arch Linux:
+
+```bash
+sudo pacman -S --needed base-devel pkgconf
+```
+
+#### macOS
+
+Install Xcode Command Line Tools:
+
+```bash
+xcode-select --install
+```
+
+#### Windows
+
+Install:
+
+- Windows Terminal, PowerShell, or Command Prompt
+- Microsoft C++ Build Tools from <https://visualstudio.microsoft.com/visual-cpp-build-tools/>
+
+During Build Tools installation, select:
+
+- Desktop development with C++
+- MSVC build tools
+- Windows SDK
+
+### 2. Install Rust and Cargo
+
+Rust and Cargo are installed together through `rustup`.
+
+#### Linux and macOS
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Choose the default installation option when prompted.
+
+After installation, restart your terminal or run:
+
+```bash
+source "$HOME/.cargo/env"
+```
+
+#### Windows
+
+Download and run `rustup-init.exe` from:
+
+```text
+https://rustup.rs/
+```
+
+Choose the default installation option when prompted, then restart your terminal.
+
+### 3. Check Rust and Cargo
+
+Run:
+
+```bash
+rustc --version
+cargo --version
+```
+
+If both commands print versions, Rust and Cargo are ready.
+
+### 4. Add Cargo to PATH if Needed
+
+Most `rustup` installations configure this automatically. If `cargo` or `post-tui` is not found, add Cargo's bin directory to your user environment.
+
+#### Linux and macOS
+
+For Bash:
+
+```bash
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+For Zsh:
+
+```bash
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+#### Windows PowerShell
+
+```powershell
+[Environment]::SetEnvironmentVariable(
+  "Path",
+  $env:Path + ";$env:USERPROFILE\.cargo\bin",
+  "User"
+)
+```
+
+After running the command, close and reopen your terminal.
+
+### 5. Install post-tui
 
 ```bash
 cargo install post-tui
 ```
 
-Run it with:
+Cargo installs the binary into:
+
+- Linux/macOS: `~/.cargo/bin/post-tui`
+- Windows: `%USERPROFILE%\.cargo\bin\post-tui.exe`
+
+### 6. Run post-tui
 
 ```bash
 post-tui
 ```
 
-To build from a local source checkout:
+### 7. Update post-tui Later
+
+To update to the latest published version:
+
+```bash
+cargo install post-tui --force
+```
+
+### Build From Source
+
+If you cloned this repository, you can build it manually:
 
 ```bash
 cd post-tui
