@@ -30,7 +30,7 @@ The app is written in Rust with `ratatui`, `crossterm`, `reqwest`, `tokio`, `ser
 - [Current Limitations](#current-limitations)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
-- [License](#license)
+- [Contributing](#contributing)
 - [Author](#author)
 
 ## Preview
@@ -400,13 +400,6 @@ It contains sample JSON and HTML requests that are useful for testing import, re
 - Clipboard support is not enabled yet.
 - Environment variables and variable substitution are not implemented yet.
 
-## Contributing
-
-Contributions, ideas, and collaboration are welcome. If you want to help improve `post-tui`, discuss features, or contribute to development, contact me on LinkedIn:
-
-```text
-https://linkedin.com/in/raufendro
-```
 
 ## Roadmap
 
@@ -418,6 +411,13 @@ https://linkedin.com/in/raufendro
 - Request tabs.
 - Config screen for timeout, redirects, default headers, and theme.
 
+## Contributing
+
+Contributions, ideas, and collaboration are welcome. If you want to help improve `post-tui`, discuss features, or contribute to development, contact me on LinkedIn:
+
+```text
+https://linkedin.com/in/raufendro
+```
 
 ## Author
 
