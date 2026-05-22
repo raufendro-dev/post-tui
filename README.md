@@ -28,6 +28,7 @@ The app is written in Rust with `ratatui`, `crossterm`, `reqwest`, `tokio`, `ser
 - [Local Data](#local-data)
 - [Sample Collection](#sample-collection)
 - [Current Limitations](#current-limitations)
+- [Contributing](#contributing)
 - [Roadmap](#roadmap)
 - [License](#license)
 - [Author](#author)
@@ -398,6 +399,14 @@ It contains sample JSON and HTML requests that are useful for testing import, re
 - Requests currently run through the main app flow rather than a cancellable background task.
 - Clipboard support is not enabled yet.
 - Environment variables and variable substitution are not implemented yet.
+
+## Contributing
+
+Contributions, ideas, and collaboration are welcome. If you want to help improve `post-tui`, discuss features, or contribute to development, contact me on LinkedIn:
+
+```text
+https://linkedin.com/in/raufendro
+```
 
 ## Roadmap
 
