@@ -409,9 +409,6 @@ It contains sample JSON and HTML requests that are useful for testing import, re
 - Request tabs.
 - Config screen for timeout, redirects, default headers, and theme.
 
-## License
-
-MIT
 
 ## Author
 
